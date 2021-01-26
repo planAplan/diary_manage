@@ -1,0 +1,13 @@
+{html, body {
+    height: 100%;
+}
+html * {
+    margin: 0;
+}
+
+body .new {
+    width: 48px;
+    height: 48px;
+    margin: auto;
+    background: url("./new.png") no-repeat 100%/100%;
+}
