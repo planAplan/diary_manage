@@ -1,9 +1,16 @@
 module.exports = {
     plugins: ["react"], // use the plugin rules within ESLint
+    env: {
+        es6: true,
+        browser: true,
+        node: true,
+    },
     parserOptions: {
         ecmaFeatures: {
             jsx: true, // enable JSX support
         },
+        ecmaVersion: 2018,
+        sourceType: "module",
     },
     settings: {
         react: {
