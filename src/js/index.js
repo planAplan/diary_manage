@@ -6,15 +6,30 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
+import DynamicAntdTheme from "dynamic-antd-theme";
+import { Button, Space } from "antd";
 
-import "../css/index.scss";
-import bgImg from '../images/bg.jpg';
-
+import "../css/index.less";
+import bgImg from "../images/bg.jpg";
+import Column from "antd/lib/table/Column";
 function App() {
     return (
         <>
-            <div class='new'></div>
-            <img src={bgImg} alt='bgImg' />
+            <div className="theme-container">
+                <span>Change antd theme: </span>
+                <DynamicAntdTheme primaryColor="#F8D57E"/>
+            </div>
+            <Space direction="vertical">
+                <Button type="primary">Primary Button</Button>
+                <Button>Default Button</Button>
+                <Button type="dashed">Dashed Button</Button>
+                {/* <br />
+                <Button type="text">Text Button</Button>
+                <Button type="link">Link Button</Button> */}
+            </Space>
+            <div class="new"></div>
+            {/* <img src={bgImg} alt="bgImg" /> */}
         </>
     );
 }

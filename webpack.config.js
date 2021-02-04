@@ -53,7 +53,9 @@ threadLoader.warmup(
         // 可以是任意模块，例如
         "babel-loader",
         "@babel/preset-env",
-        "sass-loader",
+        "babel-plugin-import",
+        // "sass-loader",
+        "less-loader",
         "postcss-loader",
         "postcss-preset-env",
         "url-loader",
@@ -79,9 +81,26 @@ module.exports = {
             },
             //处理scss文件
             {
-                test: /\.s(a|c)ss$/i,
-                //由于use数组执行顺序为从下往上(注意执行顺序)，经过scss-loader转换为css后再进行兼容性处理
-                use: [...commonCssLoader, "sass-loader"],
+                test: /\.less$/i,
+                //由于use数组执行顺序为从下往上(注意执行顺序)，经过less-loader转换为css后再进行兼容性处理
+                use: [
+                    ...commonCssLoader,
+                    {
+                        loader: "less-loader", // compiles Less to CSS
+                        options: {
+                            lessOptions: {
+                                modifyVars: {
+                                    "@primary-color": "#F8D57E", //"#1DA57A",
+                                    "link-color": "#1DA57A",
+                                    "border-radius-base": "2px",
+                                    // or
+                                    //hack: `true; @import "your-less-file-path.less";`, // Override with less file
+                                },
+                                javascriptEnabled: true,
+                            },
+                        },
+                    },
+                ],
             },
             {
                 test: /\.(jpe?g|gif|png|svg)$/,
@@ -140,6 +159,7 @@ module.exports = {
                                 corejs: 3,
                             },
                         ],
+                        ["import", { libraryName: "antd", style: true }],
                     ],
                 },
             },
@@ -155,7 +175,10 @@ module.exports = {
         ],
     },
     plugins: [
-        new CleanWebpackPlugin(),
+        new CleanWebpackPlugin({
+            cleanOnceBeforeBuildPatterns: ["**/*", "!index.html"],
+            cleanAfterEveryBuildPatterns: ["!index.html"],
+        }),
         new Htmlwebpackplugin({
             template: "./src/index.html",
             // favicon: "./src/app.ico",
@@ -203,7 +226,7 @@ module.exports = {
         //端口号
         port: 8888,
         //自动打开浏览器
-        open: false,
+        open: true,
         hot: true,
         writeToDisk: true,
     },
