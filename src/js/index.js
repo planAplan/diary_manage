@@ -6,32 +6,56 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Link } from "react-router-dom";
-import DynamicAntdTheme from "dynamic-antd-theme";
-import { Button, Space } from "antd";
+// import { BrowserRouter, Route, Link } from "react-router-dom";
+import { ConfigProvider, Layout, Button } from "antd";
 
+import NewTask from "./components/new_task";
+import Calender from "./components/calendar";
+import ProjectRequirement from "./components/project_requirements";
+// import WeeklyPinned from "./components/weekly_pinned";
+// import "antd/dist/antd.less";
 import "../css/index.less";
-import bgImg from "../images/bg.jpg";
-import Column from "antd/lib/table/Column";
+// import bgImg from "../images/bg.jpg";
+// import Column from "antd/lib/table/Column";
+
+import zhCN from "antd/lib/locale/zh_CN";
+import dayjs from "dayjs";
+import "dayjs/locale/zh-cn";
+dayjs.locale("zh-cn");
+
+const { Header, Footer, Sider, Content } = Layout;
 function App() {
     return (
-        <>
-            <div className="theme-container">
-                <span>Change antd theme: </span>
-                <DynamicAntdTheme primaryColor="#F8D57E"/>
-            </div>
-            <Space direction="vertical">
-                <Button type="primary">Primary Button</Button>
-                <Button>Default Button</Button>
-                <Button type="dashed">Dashed Button</Button>
-                {/* <br />
-                <Button type="text">Text Button</Button>
-                <Button type="link">Link Button</Button> */}
-            </Space>
-            <div class="new"></div>
-            {/* <img src={bgImg} alt="bgImg" /> */}
-        </>
+        <Layout className="app-layout" style={{ width: "1440px" }}>
+            <Sider theme="light" width="477">
+                <Layout>
+                    <Header><NewTask /></Header>
+                    <Content>
+                        <ProjectRequirement />
+                    </Content>
+                    <Footer>
+                        <Calender />
+                    </Footer>
+                </Layout>
+            </Sider>
+            <Content>
+                <Layout>
+                    <Content>Main</Content>
+                </Layout>
+            </Content>
+            <Content>
+                <Layout>
+                    <Content>second</Content>
+                </Layout>
+            </Content>
+        </Layout>
     );
 }
 
-ReactDOM.render(<App />, document.getElementById("app"));
+const Main = () => (
+    <ConfigProvider direction="ltr" locale={zhCN}>
+        <App />
+    </ConfigProvider>
+);
+
+ReactDOM.render(<Main />, document.getElementById("app"));

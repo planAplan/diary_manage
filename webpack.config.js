@@ -89,14 +89,19 @@ module.exports = {
                         loader: "less-loader", // compiles Less to CSS
                         options: {
                             lessOptions: {
-                                modifyVars: {
-                                    "@primary-color": "#F8D57E", //"#1DA57A",
-                                    "link-color": "#1DA57A",
-                                    "border-radius-base": "2px",
-                                    // or
-                                    //hack: `true; @import "your-less-file-path.less";`, // Override with less file
-                                },
                                 javascriptEnabled: true,
+                                modifyVars: {
+                                    // "@primary-color": "#F8D57E", //"#1DA57A",
+                                    // "@font-family": `Gilroy-Bold Gilroy-Regular -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+                                    // 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+                                    // 'Noto Color Emoji'`,
+                                    // "@body-background": " #F6F7FB",
+                                    // "link-color": "#1DA57A",
+                                    // "border-radius-base": "2px",
+                                    // or
+                                    'any_word_you_like': `; @import "./src/css/my-default-style.less";` // Override with less file
+                                    // hack: `true;@import "${require.resolve('./src/css/my-default-style.js')}";`, 
+                                },
                             },
                         },
                     },
@@ -162,6 +167,10 @@ module.exports = {
                         ["import", { libraryName: "antd", style: true }],
                     ],
                 },
+            },
+            {
+                test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
+                type: "asset/inline",
             },
             // {
             //     // test: /\.(ico)$/i,

@@ -1,8 +1,12 @@
 html, body {
     height: 100%;
 }
+li {
+    list-style: none;
+}
 html * {
     margin: 0;
+    border-color: transparent;
 }
 
 body .new {
@@ -10,4 +14,36 @@ body .new {
     height: 48px;
     margin: auto;
     background: url("../images/new.png") no-repeat 100%/100%;
+}
+
+
+@font-face {
+    font-family: 'Gilroy-Bold';
+    src: url("../assets/Gilroy-Bold.ttf");
+}
+@font-face {
+    font-family: 'Gilroy-Regular';
+    src: url("../assets/Gilroy-Regular.ttf");
+}
+@font-face {
+    font-family: 'Gilroy-Heavy';
+    src: url("../assets/Gilroy-Heavy.ttf");
+}
+@font-face {
+    font-family: 'Gilroy-Light';
+    src: url("../assets/Gilroy-Light.ttf");
+}
+@font-face {
+    font-family: 'Gilroy-Medium';
+    src: url("../assets/Gilroy-Medium.ttf");
+}
+
+#app {
+    font-family: "Gilroy-Bold";
+}
+#app {
+    min-height: 1024px;
+    .app-layout {
+        height: 100%;
+    }
 }
